@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For You</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #d9b77d;
+  --gold-light: #f4dfb5;
+  --wine: #743c49;
+  --bg: #100b0e;
+  --muted: #bba9a1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 15%, #38202a, transparent 50%),
+    radial-gradient(ellipse at 5% 90%, #29151e, transparent 40%),
+    var(--bg);
+  color: #f4e8d1;
+  font-family: 'Vazirmatn', sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+#stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #f2d9a8;
+  opacity: .4;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: .15; transform: scale(.7); }
+  50% { opacity: .9; transform: scale(1.5); }
+}
+
+.ambient {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: .13;
+  pointer-events: none;
+  z-index: 0;
+  background: #a34d57;
+}
+
+.ambient.one { top: 10%; left: -150px; }
+.ambient.two { bottom: 0; right: -150px; background: #b58a52; }
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.screen {
+  min-height: 100svh;
+  display: none;
+  padding: 45px 20px 65px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: screenIn .6s ease both;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  direction: ltr;
+  text-align: center;
+}
+
+.gold-line {
+  width: 70px;
+  height: 1px;
+  margin: 22px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+h1, h2, h3 {
+  font-family: 'Amiri', serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(44px, 8vw, 82px);
+  line-height: 1.3;
+  margin: 20px 0;
+  color: var(--gold-light);
+}
+
+h2 {
+  font-size: clamp(32px, 5vw, 50px);
+  color: var(--gold-light);
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  line-height: 2.3;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.small-note {
+  font-size: 10px;
+  color: #88756f;
+  letter-spacing: 3px;
+  margin-top: 40px;
+  direction: ltr;
+  text-align: center;
+}
+
+/* BUTTONS */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 28px;
+  border: 1px solid #d9b77d88;
+  border-radius: 999px;
+  color: var(--gold-light);
+  background: linear-gradient(135deg, #d9b77d25, #ffffff08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  cursor: pointer;
+  font-size: 13px;
+  overflow: hidden;
+  transition: .3s ease;
+  box-shadow: inset 0 1px 0 #ffffff20, 0 8px 25px #0003;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, #fff4, transparent);
+  transform: rotate(25deg);
+  transition: left .7s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  left: 150%;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-light);
+  box-shadow: 0 0 25px #d9b77d25, 0 12px 30px #0005;
+}
+
+.btn:active {
+  transform: scale(.96);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #a56e48, #70404a);
+  color: #fff5df;
+  border-color: #e1bd85;
+}
+
+.btn.secondary {
+  background: #ffffff08;
+  border-color: #ffffff30;
+  color: #d5c3b9;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+/* INTRO */
+
+.intro-card {
+  text-align: center;
+  max-width: 700px;
+  padding: 30px 15px;
+}
+
+.intro-symbol {
+  width: 105px;
+  height: 105px;
+  border: 1px solid #d9b77d66;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 35px;
+  color: var(--gold);
+  font-family: 'Amiri', serif;
+  font-size: 44px;
+  box-shadow: 0 0 55px #d9b77d13, inset 0 0 30px #d9b77d0d;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+/* ENVELOPE */
+
+.envelope-stage {
+  width: min(390px, 85vw);
+  height: 290px;
+  position: relative;
+  margin: 35px auto 5px;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 205px;
+  background: linear-gradient(145deg, #7b3944, #3b1d2a);
+  border-radius: 5px 5px 12px 12px;
+  box-shadow: 0 25px 65px #0008;
+  z-index: 3;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #ffffff0d, transparent 60%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #a95a5c, #522431);
+  clip-path: polygon(0 0, 50% 58%, 100% 0);
+  transform-origin: top;
+  transition: transform 1s ease;
+  z-index: 5;
+  backface-visibility: hidden;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: linear-gradient(35deg, #512332, #8b4650);
+  clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+  pointer-events: none;
+}
+
+.seal {
+  position: absolute;
+  z-index: 7;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d9a66f, #8d4d36 75%);
+  border: 2px solid #e7c18a;
+  color: #4b2027;
+  display: grid;
+  place-items: center;
+  font-family: 'Amiri', serif;
+  font-size: 25px;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 15px #0007;
+  transition: opacity .4s;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.paper {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 8%;
+  width: 84%;
+  height: 215px;
+  padding: 25px;
+  background: #e9d9b8;
+  color: #543a32;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  box-shadow: 0 0 25px #0005;
+  transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope.open .paper {
+  transform: translateY(-135px);
+}
+
+/* LETTER */
+
+.letter-wrap {
+  width: min(680px, 94vw);
+  margin: 25px auto;
+}
+
+.letter {
+  position: relative;
+  background:
+    radial-gradient(circle at 10% 10%, #fff5, transparent 30%),
+    linear-gradient(145deg, #f3e7ce, #ddc8a5);
+  color: #49342f;
+  padding: clamp(25px, 6vw, 55px);
+  box-shadow: 0 25px 80px #0008;
+  border: 1px solid #fff7;
+  border-radius: 3px;
+  min-height: 420px;
+  overflow-wrap: anywhere;
+}
+
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid #9a775655;
+  pointer-events: none;
+}
+
+.letter-top {
+  text-align: center;
+  color: #8c6248;
+  font-family: 'Amiri', serif;
+  font-size: 18px;
+  position: relative;
+}
+
+.letter h3 {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  color: #613c39;
+  margin: 12px 0 20px;
+  position: relative;
+}
+
+.letter-text {
+  font-family: 'Amiri', serif;
+  font-size: 21px;
+  line-height: 2.25;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  min-height: 170px;
+  position: relative;
+}
+
+.signature {
+  text-align: left;
+  font-family: 'Amiri', serif;
+  font-size: 25px;
+  color: #8b4c4b;
+  margin-top: 20px;
+  position: relative;
+}
+
+/* GALLERY */
+
+.gallery {
+  width: min(900px, 95vw);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+  margin: 30px auto;
+}
+
+.photo-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid #d9b77d45;
+  background: linear-gradient(145deg, #35202a, #171015);
+  border-radius: 18px;
+  cursor: pointer;
+  box-shadow: 0 15px 35px #0005;
+  transition: transform .4s, border-color .4s;
+  min-width: 0;
+}
+
+.photo-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .8s, filter .5s;
+}
+
+.photo-card:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.08);
+}
+
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold);
+  font-family: 'Amiri', serif;
+  font-size: 30px;
+  text-align: center;
+  padding: 20px;
+  background: radial-gradient(circle, #68404b, #1c1017 75%);
+}
+
+.photo-placeholder span {
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 10px;
+  color: #bca9a0;
+}
+
+.photo-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 30px 15px 15px;
+  background: linear-gradient(transparent, #10090de0);
+  color: #f1dfc1;
+  font-size: 11px;
+  direction: ltr;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: #090609ed;
+  backdrop-filter: blur(15px);
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border: 1px solid #d9b77d66;
+  box-shadow: 0 20px 70px #000;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #d9b77d77;
+  background: #2a1a20;
+  color: var(--gold-light);
+  font-size: 23px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.close-lightbox:hover {
+  transform: rotate(90deg);
+  background: #65303c;
+}
+
+/* FINAL */
+
+.final-card {
+  width: min(620px, 94vw);
+  text-align: center;
+  padding: 45px 28px;
+  border: 1px solid #d9b77d4a;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff09, #ffffff02);
+  box-shadow: 0 25px 70px #0005;
+  backdrop-filter: blur(10px);
+}
+
+.final-heart {
+  color: #d9a0a0;
+  font-size: 45px;
+  animation: heartbeat 1.8s infinite;
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+}
+
+.progress {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff10;
+  z-index: 10;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #8c4a52, #e6c68e);
+  transition: width .6s ease;
+}
+
+.step-counter {
+  color: #8e7c76;
+  font-size: 11px;
+  letter-spacing: 3px;
+  direction: ltr;
+  margin-top: 28px;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+  color: #76635f;
+  font-size: 10px;
+  letter-spacing: 3px;
+  direction: ltr;
+}
+
+@media (max-width: 600px) {
+  .screen {
+    padding: 35px 15px 60px;
+  }
+
+  .gallery {
+    gap: 10px;
+  }
+
+  .photo-card {
+    border-radius: 12px;
+  }
+
+  .letter-text {
+    font-size: 19px;
+    line-height: 2.15;
+  }
+
+  .letter {
+    min-height: 380px;
+    padding: 28px 24px;
+  }
+
+  .button-row {
+    gap: 9px;
+  }
+
+  .btn {
+    padding: 11px 21px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+<div class="ambient one"></div>
+<div class="ambient two"></div>
+
+<main>
+
+<!-- INTRO -->
+<section class="screen active" id="screen0">
+  <div class="intro-card">
+    <div class="intro-symbol">L</div>
+    <div class="eyebrow">A STORY WRITTEN FOR YOU</div>
+    <div class="gold-line"></div>
+
+    <h1>یک نامه برای تو</h1>
+
+    <p class="subtitle">
+      بعضی حرف‌ها را نمی‌شود فقط گفت...
+      <br>
+      باید آن‌ها را در یک داستان زندگی کرد.
+    </p>
+
+    <div class="button-row">
+      <button class="btn primary" onclick="goTo(1)">
+        شروع داستان <span>✦</span>
+      </button>
+    </div>
+
+    <div class="small-note">AN EXPERIENCE MADE OF MEMORIES</div>
+  </div>
+</section>
+
+
+<!-- ENVELOPE -->
+<section class="screen" id="screen1">
+  <div class="eyebrow">CHAPTER I — THE ENVELOPE</div>
+  <div class="gold-line"></div>
+
+  <h2>نامه‌ای برای تو</h2>
+
+  <p class="subtitle">
+    یک نامه قدیمی، با حرف‌هایی که مدت‌ها منتظر گفتنشان بوده‌اند.
+  </p>
+
+  <div class="envelope-stage">
+    <div class="paper">برای کسی که دنیای من را زیباتر کرد...</div>
+
+    <div class="envelope" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="seal">L</div>
+    </div>
+  </div>
+
+  <div class="button-row">
+    <button class="btn primary" id="openEnvelope" onclick="openLetter()">
+      ✉ باز کردن نامه
+    </button>
+    <button class="btn secondary" onclick="goTo(0)">بازگشت</button>
+  </div>
+
+  <div class="step-counter">01 / 04</div>
+</section>
+
+
+<!-- LETTER -->
+<section class="screen" id="screen2">
+  <div class="eyebrow">CHAPTER II — THE LETTER</div>
+  <div class="gold-line"></div>
+
+  <h2>چند خط از قلب من</h2>
+
+  <div class="letter-wrap">
+    <div class="letter">
+      <div class="letter-top">✦ نامه‌ای که برای تو نوشته شده ✦</div>
+      <div class="gold-line"></div>
+
+      <h3>عزیزترینم...</h3>
+
+      <div class="letter-text" id="letterText"></div>
+
+      <div class="signature">با تمام عشق، من</div>
+    </div>
+  </div>
+
+  <div class="button-row">
+    <button class="btn secondary" onclick="goTo(1)">نامه قبلی</button>
+    <button class="btn primary" onclick="goTo(3)">دیدن خاطرات ✦</button>
+  </div>
+
+  <div class="step-counter">02 / 04</div>
+</section>
+
+
+<!-- GALLERY -->
+<section class="screen" id="screen3">
+  <div class="eyebrow">CHAPTER III — OUR MEMORIES</div>
+  <div class="gold-line"></div>
+
+  <h2>قاب‌هایی از خاطره</h2>
+
+  <p class="subtitle">
+    بعضی لحظه‌ها تمام نمی‌شوند؛
+    فقط در قاب عکس‌ها منتظر می‌مانند.
+  </p>
+
+  <div class="gallery">
+
+    <div class="photo-card" onclick="openPhoto(0)">
+      <div class="photo-placeholder" id="placeholder0">
+        ✧ <span>عکس اول</span>
+      </div>
+      <img src="./photos/photo1.jpg" alt="Memory 1"
+           onload="imageLoaded(0)" onerror="imageFailed(0)">
+      <div class="photo-label">A MOMENT TO REMEMBER</div>
+    </div>
+
+    <div class="photo-card" onclick="openPhoto(1)">
+      <div class="photo-placeholder" id="placeholder1">
+        ✧ <span>عکس دوم</span>
+      </div>
+      <img src="./photos/photo2.jpg" alt="Memory 2"
+           onload="imageLoaded(1)" onerror="imageFailed(1)">
+      <div class="photo-label">A BEAUTIFUL MEMORY</div>
+    </div>
+
+    <div class="photo-card" onclick="openPhoto(2)">
+      <div class="photo-placeholder" id="placeholder2">
+        ✧ <span>عکس سوم</span>
+      </div>
+      <img src="./photos/photo3.jpg" alt="Memory 3"
+           onload="imageLoaded(2)" onerror="imageFailed(2)">
+      <div class="photo-label">JUST YOU AND ME</div>
+    </div>
+
+    <div class="photo-card" onclick="openPhoto(3)">
+      <div class="photo-placeholder" id="placeholder3">
+        ✧ <span>عکس چهارم</span>
+      </div>
+      <img src="./photos/photo4.jpg" alt="Memory 4"
+           onload="imageLoaded(3)" onerror="imageFailed(3)">
+      <div class="photo-label">FOREVER IN MY HEART</div>
+    </div>
+
+  </div>
+
+  <div class="button-row">
+    <button class="btn secondary" onclick="goTo(2)">بازگشت</button>
+    <button class="btn primary" onclick="goTo(4)">آخرین صفحه ✦</button>
+  </div>
+
+  <div class="step-counter">03 / 04</div>
+</section>
+
+
+<!-- FINAL -->
+<section class="screen" id="screen4">
+  <div class="final-card">
+    <div class="final-heart">♡</div>
+
+    <div class="eyebrow">CHAPTER IV — THE END?</div>
+    <div class="gold-line"></div>
+
+    <h2>پایان یک نامه، نه یک داستان</h2>
+
+    <p class="subtitle">
+      شاید این داستان یک روز تمام شود،
+      اما بعضی احساس‌ها هیچ‌وقت به نقطه پایان نمی‌رسند.
+      <br><br>
+      ممنون که بخشی از زیباترین فصل زندگی منی.
+    </p>
+
+    <div class="gold-line"></div>
+
+    <div class="eyebrow">THE STORY CONTINUES...</div>
+
+    <div class="button-row">
+      <button class="btn primary" onclick="restartStory()">
+        دوباره از اول ↻
+      </button>
+      <button class="btn secondary" onclick="goTo(3)">
+        دیدن خاطرات
+      </button>
+    </div>
+  </div>
+
+  <div class="step-counter">04 / 04</div>
+</section>
+
+</main>
+
+<footer>A STORY MADE JUST FOR YOU</footer>
+
+<div class="progress">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closePhoto(event)">
+  <button class="close-lightbox" onclick="closePhoto()">×</button>
+  <img id="lightboxImage" src="" alt="Selected memory">
+</div>
+
+
+<script>
+
+/* ==================================
+   1. LETTER TEXT
+   متن نامه را اینجا تغییر بده
+================================== */
+
+const message = `می‌خواستم چند خط برایت بنویسم؛
+نه به خاطر مناسبت خاصی،
+فقط چون بعضی آدم‌ها آن‌قدر ارزشمندند
+که باید هر از گاهی به آن‌ها یادآوری کرد
+چقدر حضورشان مهم است.
+
+تو یکی از قشنگ‌ترین اتفاق‌های زندگی منی.
+شاید همیشه نتوانم بهترین کلمات را پیدا کنم،
+اما همیشه دلیلی برای دوست داشتنت دارم.
+
+امیدوارم هر روزت پر از لبخند باشد،
+و همیشه بدانی که برای من خاصی.`;
+
+
+/* ==================================
+   2. STAR BACKGROUND
+================================== */
+
+const starBox = document.getElementById('stars');
+
+for (let i = 0; i < 65; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDelay = Math.random() * 4 + 's';
+  star.style.animationDuration = (2 + Math.random() * 4) + 's';
+  starBox.appendChild(star);
+}
+
+
+/* ==================================
+   3. NAVIGATION
+================================== */
+
+let currentScreen = 0;
+let typingTimer = null;
+let typingStarted = false;
+let letterOpened = false;
+
+function goTo(number) {
+  if (number < 0 || number > 4) return;
+
+  clearTimeout(typingTimer);
+
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+
+  const target = document.getElementById('screen' + number);
+  target.classList.add('active');
+
+  currentScreen = number;
+
+  const progress = [0, 25, 50, 75, 100];
+
+  document.getElementById('progressFill').style.width =
+    progress[number] + '%';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (number === 2 && !typingStarted) {
+    startTyping();
+  }
+}
+
+
+/* ==================================
+   4. ENVELOPE
+================================== */
+
+function openLetter() {
+  if (letterOpened) {
+    goTo(2);
+    return;
+  }
+
+  letterOpened = true;
+
+  document.getElementById('envelope').classList.add('open');
+
+  const button = document.getElementById('openEnvelope');
+  button.textContent = 'نامه باز شد ✦';
+
+  setTimeout(() => {
+    if (currentScreen === 1) {
+      goTo(2);
+    }
+  }, 1500);
+}
+
+
+/* ==================================
+   5. TYPEWRITER
+   با خروج از صفحه، تایپ متوقف می‌شود.
+   ورود دوباره از ابتدا تایپ را کامل می‌کند.
+================================== */
+
+function startTyping() {
+  if (typingStarted) return;
+
+  typingStarted = true;
+
+  const target = document.getElementById('letterText');
+  target.textContent = '';
+
+  let index = 0;
+
+  function type() {
+    if (currentScreen !== 2) {
+      typingStarted = false;
+      return;
+    }
+
+    if (index < message.length) {
+      target.textContent += message.charAt(index);
+      index++;
+
+      typingTimer = setTimeout(type, 35);
+    } else {
+      typingStarted = false;
+    }
+  }
+
+  type();
+}
+
+
+/* ==================================
+   6. GALLERY
+================================== */
+
+const photoSources = [
+  './photos/photo1.jpg',
+  './photos/photo2.jpg',
+  './photos/photo3.jpg',
+  './photos/photo4.jpg'
+];
+
+function imageLoaded(index) {
+  const placeholder = document.getElementById('placeholder' + index);
+  if (placeholder) {
+    placeholder.style.display = 'none';
+  }
+}
+
+function imageFailed(index) {
+  const placeholder = document.getElementById('placeholder' + index);
+  if (placeholder) {
+    placeholder.style.display = 'flex';
+  }
+}
+
+function openPhoto(index) {
+  const image = document.querySelectorAll('.photo-card img')[index];
+
+  if (!image || !image.complete || image.naturalWidth === 0) {
+    return;
+  }
+
+  document.getElementById('lightboxImage').src = photoSources[index];
+  document.getElementById('lightbox').classList.add('show');
+}
+
+function closePhoto(event) {
+  if (event && event.target.id !== 'lightbox') return;
+
+  document.getElementById('lightbox').classList.remove('show');
+  document.getElementById('lightboxImage').src = '';
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closePhoto();
+  }
+});
+
+
+/* ==================================
+   7. RESTART
+================================== */
+
+function restartStory() {
+  clearTimeout(typingTimer);
+
+  typingStarted = false;
+  letterOpened = false;
+
+  document.getElementById('letterText').textContent = '';
+
+  document.getElementById('envelope').classList.remove('open');
+
+  document.getElementById('openEnvelope').textContent =
+    '✉ باز کردن نامه';
+
+  closePhoto();
+
+  goTo(0);
+}
+
+</script>
+
+</body>
+</html>
